@@ -22,7 +22,7 @@ describe("Transfer", () => {
         trxResponse = await fakeNFT.transfer(1, sender, reciver);
         trxResponse.wait(2);
 
-        currentValue = await fakeNFT.getBalance(reciver);
+        currentValue = await fakeNFT.balanceOf(reciver);
 
         assert.equal(currentValue, expectedvalue);
     })
@@ -36,7 +36,21 @@ describe("Transfer", () => {
         trxResponse = await fakeNFT.transfer(1, sender, reciver);
         trxResponse.wait(2);
 
-        currentValue = await fakeNFT.getBalance(sender);
+        currentValue = await fakeNFT.balanceOf(sender);
+
+        assert.equal(currentValue, expectedvalue);
+    })
+
+    it("Should return the owner as reciever upon tranfer 1 NFT", async () => {
+        let expectedvalue = reciver, trxResponse, currentValue;
+
+        trxResponse = await fakeNFT.mint(sender);
+        trxResponse.wait(2);
+
+        trxResponse = await fakeNFT.transfer(1, sender, reciver);
+        trxResponse.wait(2);
+
+        currentValue = await fakeNFT.ownerOf(1);
 
         assert.equal(currentValue, expectedvalue);
     })
@@ -70,7 +84,7 @@ describe("Transfer", () => {
         trxResponse = await fakeNFT.transfer(1, sender, reciver);
         trxResponse.wait(2);
 
-        currentValue = await fakeNFT.getBalance(sender);
+        currentValue = await fakeNFT.balanceOf(sender);
 
         assert.equal(currentValue, expectedvalue);
     })

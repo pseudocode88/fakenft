@@ -46,7 +46,7 @@ describe("Mint", () => {
         trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
         trxResponse.wait(2)
 
-        let currentValue = await fakeNFT.getBalance("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        let currentValue = await fakeNFT.balanceOf("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
 
         assert.equal(expectedvalue, currentValue);
     });
