@@ -16,4 +16,8 @@ contract NFT {
         address _sender,
         address _reciever
     ) public virtual {}
+
+    function balanceOf(address _wallet) public virtual returns (uint)   {}
+
+    function ownerOf(uint _tokenId) public virtual returns (address)   {}
 }

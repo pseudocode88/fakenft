@@ -29,11 +29,11 @@ contract FakeNFT is NFT {
         return uniqueHolders;
     }
 
-    function ownerOf(uint _tokenId) public view returns (address) {
+    function ownerOf(uint _tokenId) public view override returns (address) {
         return tokenIdToOwner[_tokenId];
     }
 
-    function balanceOf(address _wallet) public view returns (uint) {
+    function balanceOf(address _wallet) public view override returns (uint) {
         return addressToBalance[_wallet];
     }
 
