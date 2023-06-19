@@ -25,7 +25,7 @@ describe("Deployment", () => {
 
     it("Should init the contract with 0 holders", async () => {
         let expectedvalue = 0;
-        let currentValue = await fakeNFT.getAllHolders();
+        let currentValue = await fakeNFT.getUniqueHolderCount();
 
         assert.equal(expectedvalue, currentValue);
     });

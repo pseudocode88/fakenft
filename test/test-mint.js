@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 const { expect, assert } = require("chai");
 
-describe("Minting", () => {
+describe("Mint", () => {
     let fakeNFTFactory, fakeNFT;
 
     beforeEach(async () => {
@@ -46,7 +46,7 @@ describe("Minting", () => {
         trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
         trxResponse.wait(2)
 
-        let currentValue = await fakeNFT.getNumberOfTokensHolding("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        let currentValue = await fakeNFT.getBalance("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
 
         assert.equal(expectedvalue, currentValue);
     });
@@ -62,7 +62,7 @@ describe("Minting", () => {
         trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
         trxResponse.wait(2)
 
-        let currentValue = await fakeNFT.getUniqueHolders();
+        let currentValue = await fakeNFT.getUniqueHolderCount();
 
         assert.equal(expectedvalue, currentValue);
     });
@@ -84,7 +84,7 @@ describe("Minting", () => {
         trxResponse = await fakeNFT.mint("0xbDA5747bFD65F08deb54cb465eB87D40e51B197E");
         trxResponse.wait(2)
 
-        let currentValue = await fakeNFT.getUniqueHolders();
+        let currentValue = await fakeNFT.getUniqueHolderCount();
 
         assert.equal(expectedvalue, currentValue);
     });
