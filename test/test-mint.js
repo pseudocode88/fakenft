@@ -66,4 +66,48 @@ describe("Minting", () => {
 
         assert.equal(expectedvalue, currentValue);
     });
+
+    it("Should return unique holders as 3 when three people mint NFT", async () => {
+        let expectedvalue = 3;
+        let trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xbDA5747bFD65F08deb54cb465eB87D40e51B197E");
+        trxResponse.wait(2)
+
+        let currentValue = await fakeNFT.getUniqueHolders();
+
+        assert.equal(expectedvalue, currentValue);
+    });
+
+    it("Should return supply minted as 5 when three people mint 5 NFTs", async () => {
+        let expectedvalue = 5;
+        let trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199");
+        trxResponse.wait(2)
+
+        trxResponse = await fakeNFT.mint("0xbDA5747bFD65F08deb54cb465eB87D40e51B197E");
+        trxResponse.wait(2)
+
+        let currentValue = await fakeNFT.getSupplyMinted();
+
+        assert.equal(expectedvalue, currentValue);
+    });
 })
