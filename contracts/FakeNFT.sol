@@ -29,11 +29,11 @@ contract FakeNFT is NFT {
         return uniqueHolders;
     }
 
-    function getOwner(uint _tokenId) public view returns (address) {
+    function ownerOf(uint _tokenId) public view returns (address) {
         return tokenIdToOwner[_tokenId];
     }
 
-    function getBalance(address _wallet) public view returns (uint) {
+    function balanceOf(address _wallet) public view returns (uint) {
         return addressToBalance[_wallet];
     }
 
@@ -43,7 +43,7 @@ contract FakeNFT is NFT {
         addressToBalance[_wallet] += 1;
         tokenIdToOwner[tokenId] = _wallet;
 
-        uniqueHolders += (getBalance(_wallet) == 1) ? 1 : 0;
+        uniqueHolders += (balanceOf(_wallet) == 1) ? 1 : 0;
 
         supplyMinted += 1;
         return tokenId;
@@ -58,7 +58,7 @@ contract FakeNFT is NFT {
         addressToBalance[_reciever] += 1;
         tokenIdToOwner[_tokenId] = _reciever;
 
-        uniqueHolders -= (getBalance(_sender) == 0) ? 1 : 0;
-        uniqueHolders += (getBalance(_reciever) == 1) ? 1 : 0;
+        uniqueHolders -= (balanceOf(_sender) == 0) ? 1 : 0;
+        uniqueHolders += (balanceOf(_reciever) == 1) ? 1 : 0;
     }
 }
