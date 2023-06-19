@@ -10,4 +10,10 @@ contract NFT {
     }
 
     function mint(address _wallet) public virtual returns (uint) {}
+
+    function transfer(
+        uint _tokenId,
+        address _sender,
+        address _reciever
+    ) public virtual {}
 }
