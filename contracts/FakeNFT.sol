@@ -5,16 +5,11 @@ import "hardhat/console.sol";
 import "./NFT.sol";
 
 contract FakeNFT is NFT {
-    struct Holder {
-        address wallet;
-        uint tokenId;
-    }
-
     uint public uniqueHolders;
 
-    Holder[] holders;
+    mapping(address => uint) addressToBalance;
 
-    mapping(address => uint) addressToNumberOfMints;
+    mapping(uint => address) tokenIdToOwner;
 
     constructor() NFT(10) {}
 
@@ -30,26 +25,40 @@ contract FakeNFT is NFT {
         return supplyMinted;
     }
 
-    function getAllHolders() public view returns (uint) {
-        return holders.length;
-    }
-
-    function getUniqueHolders() public view returns (uint) {
+    function getUniqueHolderCount() public view returns (uint) {
         return uniqueHolders;
     }
 
-    function getNumberOfTokensHolding(
-        address _wallet
-    ) public view returns (uint) {
-        return addressToNumberOfMints[_wallet];
+    function getOwner(uint _tokenId) public view returns (address) {
+        return tokenIdToOwner[_tokenId];
+    }
+
+    function getBalance(address _wallet) public view returns (uint) {
+        return addressToBalance[_wallet];
     }
 
     function mint(address _wallet) public override returns (uint) {
         uint tokenId = getTokenId();
-        holders.push(Holder(_wallet, tokenId));
-        addressToNumberOfMints[_wallet] += 1;
-        uniqueHolders += (addressToNumberOfMints[_wallet] == 1) ? 1 : 0;
+
+        addressToBalance[_wallet] += 1;
+        tokenIdToOwner[tokenId] = _wallet;
+
+        uniqueHolders += (getBalance(_wallet) == 1) ? 1 : 0;
+
         supplyMinted += 1;
         return tokenId;
+    }
+
+    function transfer(
+        uint _tokenId,
+        address _sender,
+        address _reciever
+    ) public override {
+        addressToBalance[_sender] -= 1;
+        addressToBalance[_reciever] += 1;
+        tokenIdToOwner[_tokenId] = _reciever;
+
+        uniqueHolders -= (getBalance(_sender) == 0) ? 1 : 0;
+        uniqueHolders += (getBalance(_reciever) == 1) ? 1 : 0;
     }
 }
