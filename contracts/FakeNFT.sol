@@ -9,7 +9,7 @@ contract FakeNFT is NFT {
 
     mapping(address => uint) internal addressToBalance;
 
-    mapping(uint => address) tokenIdToOwner;
+    mapping(uint => address) internal tokenIdToOwner;
 
     constructor() NFT(10) {}
 
