@@ -7,7 +7,7 @@ import "./NFT.sol";
 contract FakeNFT is NFT {
     uint public uniqueHolders;
 
-    mapping(address => uint) addressToBalance;
+    mapping(address => uint) internal addressToBalance;
 
     mapping(uint => address) tokenIdToOwner;
 
