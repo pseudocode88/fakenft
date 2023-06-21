@@ -21,6 +21,10 @@ contract FakeNFT is NFT {
         return supplyMinted;
     }
 
+    function getMaxSupply() public view override returns (uint) {
+        return i_maxSupply;
+    }
+
     function getUniqueHolderCount() public view returns (uint) {
         return uniqueHolders;
     }
