@@ -38,6 +38,7 @@ contract FakeNFT is NFT {
     }
 
     function mint(address _wallet) public override returns (uint) {
+        if(supplyMinted == i_maxSupply) { return 0; }
         uint tokenId = getTokenId();
 
         addressToBalance[_wallet] += 1;
