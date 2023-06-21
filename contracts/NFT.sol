@@ -20,4 +20,8 @@ contract NFT {
     function balanceOf(address _wallet) public virtual returns (uint)   {}
 
     function ownerOf(uint _tokenId) public virtual returns (address)   {}
+
+    function getMaxSupply() public view returns (uint) {
+        return i_maxSupply;
+    }
 }
