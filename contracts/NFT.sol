@@ -21,7 +21,5 @@ contract NFT {
 
     function ownerOf(uint _tokenId) public virtual returns (address)   {}
 
-    function getMaxSupply() public view returns (uint) {
-        return i_maxSupply;
-    }
+    function getMaxSupply() public virtual returns (uint) {}
 }
